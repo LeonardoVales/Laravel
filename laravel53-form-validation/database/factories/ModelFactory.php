@@ -44,6 +44,7 @@ $factory->state(\App\Client::class, 'pessoa_fisica', function(\Faker\Generator $
         'estado_civil' => rand(1,3),
         'sexo' => rand(1,10) % 2 == 0 ? 'm' : 'f',
         'deficiencia_fisica' => $faker->word,
+        'pessoa' => \App\Client::PESSOA_FISICA
     ];
 });
 
@@ -52,5 +53,6 @@ $factory->state(\App\Client::class, 'pessoa_juridica', function(\Faker\Generator
     return [
         'documento' => $cnpjs[array_rand($cnpjs,1)],
         'fantasia' => $faker->company,
+        'pessoa' => \App\Client::PESSOA_JURIDICA
     ];
 });

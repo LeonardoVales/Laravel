@@ -14,14 +14,21 @@ class ClientController extends Controller
 
     }
 
-    public function create() //mostra o form de cadastro
+    public function create(Request $request) //mostra o form de cadastro
     {
-        return view('clients.create');
+        $paramPessoa = $request->get('pessoa');
+        $pessoa = Client::getPessoa($paramPessoa);
+        return view('clients.create', compact('pessoa'));
     }
     
     public function store(Request $request) // persistir os dados no banco
     {
-        
+        $data = $request->all();
+        $data['pessoa'] = Client::getPessoa($request->get('pessoa'));
+        $data['inadimplente'] = false;
+        Client::create($data);
+        return redirect()->route('clients.index');
+
     }
     
     public function show($id) // mostra o form de atualizarção

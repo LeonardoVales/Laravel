@@ -6,8 +6,14 @@
 <div class="container">
     <div class="row">
         <h3>Novo Cliente</h3>
-        <form action="{{ route('clients.store') }}" method="POST" class="form">
+        <h4>{{ $pessoa == \App\Client::PESSOA_JURIDICA ? 'Pessoa Juridica' : 'Pessoa Física' }}</h4>
+        <a href="{{ route('clients.create',['pessoa' => \App\Client::PESSOA_FISICA]) }}">Pessoa Física</a>
+        <a href="{{ route('clients.create',['pessoa' => \App\Client::PESSOA_JURIDICA]) }}">Pessoa Jurídica</a>
+        <br/><br/>
 
+        <form action="{{ route('clients.store') }}" method="POST" class="form">
+            {{csrf_field()}}
+            <input type="hidden" name="pessoa" vlaue="{{$pessoa}}"/>
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" name="nome" id="nome">
@@ -21,14 +27,21 @@
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" name="email" id="email">
-            </div>     
+            </div>    
 
             <div class="form-group">
                 <label for="telefone">Telefone</label>
-                <input type="text" class="form-control" name="telefone" id="telefone">
-            </div>   
+                <input type="telefone" class="form-control" name="telefone" id="telefone">
+            </div>              
 
-            <div class="form-group">
+ 
+        @if($pessoa == \App\Client::PESSOA_JURIDICA)
+        <div class="form-group">
+                <label for="fantasia">Fantasia</label>
+                <input type="text" class="form-control" name="fantasia" id="fantasia">
+        </div>  
+        @else
+        <div class="form-group">
                 <label for="estado_civil">Estado Civil</label>
                 <select name="estado_civil" id="estado_civil" class="form-control">
                     <option value="0">Selecione</option>
@@ -59,7 +72,9 @@
             <div class="form-group">
                 <label for="deficiencia_fisica">Deficiencia Fisica</label>
                 <input type="text" class="form-control" name="deficiencia_fisica" id="deficiencia_fisica">
-            </div>    
+            </div>            
+        @endif
+
 
             <div class="checkbox">
                 <labe>

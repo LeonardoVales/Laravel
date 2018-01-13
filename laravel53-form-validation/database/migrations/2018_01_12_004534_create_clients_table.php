@@ -25,6 +25,7 @@ class CreateClientsTable extends Migration
             $table->enum('estado_civil', array_keys(\App\Client::ESTADOS_CIVIS))->nullable();
             $table->string('deficiencia_fisica')->nullable();
             $table->string('fantasia')->nullable();
+            $table->string('pessoa');
             $table->timestamps();
         });
     }
