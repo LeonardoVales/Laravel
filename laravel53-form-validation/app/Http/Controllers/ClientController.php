@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Client;
+use Illuminate\Http\Request;
+use App\Http\Requests\ClientRequest;
 
 class ClientController extends Controller
 {
@@ -21,7 +22,7 @@ class ClientController extends Controller
         return view('clients.create', compact('pessoa'));
     }
     
-    public function store(Request $request) // persistir os dados no banco
+    public function store(ClientRequest $request) // persistir os dados no banco
     {
         $data = $request->all();
         $data['pessoa'] = Client::getPessoa($request->get('pessoa'));

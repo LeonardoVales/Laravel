@@ -12,7 +12,7 @@ class Client extends Model
         3 => 'Divorciado'
     ];
 
-    const PESSOA_FISICA = 'fisica';
+    const PESSOA_FISICA   = 'fisica';
     const PESSOA_JURIDICA = 'juridica';
 
     protected $fillableGeneral = [
@@ -20,7 +20,7 @@ class Client extends Model
         'documento',
         'email',
         'telefone',
-        'inadimplente',       
+        'inadimplente',
     ];
 
     protected $fillableFisica = [

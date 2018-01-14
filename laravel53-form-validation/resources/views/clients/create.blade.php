@@ -5,12 +5,19 @@
 
 <div class="container">
     <div class="row">
+        
         <h3>Novo Cliente</h3>
         <h4>{{ $pessoa == \App\Client::PESSOA_JURIDICA ? 'Pessoa Juridica' : 'Pessoa Física' }}</h4>
         <a href="{{ route('clients.create',['pessoa' => \App\Client::PESSOA_FISICA]) }}">Pessoa Física</a>
         <a href="{{ route('clients.create',['pessoa' => \App\Client::PESSOA_JURIDICA]) }}">Pessoa Jurídica</a>
         <br/><br/>
-
+        @if($errors->any())
+            <ul class="alert alert-danger">
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        @endif
         <form action="{{ route('clients.store') }}" method="POST" class="form">
             {{csrf_field()}}
             <input type="hidden" name="pessoa" vlaue="{{$pessoa}}"/>
@@ -20,7 +27,7 @@
             </div>
 
             <div class="form-group">
-                <label for="documento">Documento</label>
+                <label for="documento">{{ $pessoa == \App\Client::PESSOA_JURIDICA ? 'CNPJ' : 'CPF' }}</label>
                 <input type="text" class="form-control" name="documento" id="documento">
             </div>
 
